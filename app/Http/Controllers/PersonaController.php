@@ -12,7 +12,31 @@ class PersonaController extends Controller
 {
     public function index()
     {
-        $personas = Persona::all(); // Récupère tous les personas depuis la base de données
+        // Récupérer tous les personas à partir du modèle
+        $personas = Persona::getAllPersonas();
+
+        // Passer les données récupérées à la vue
         return view('personas.index', compact('personas')); // Affiche la vue index avec les personas
+    }
+
+
+    public function show($id)
+    {
+        // dd($id); 
+
+        //findOrfail méthode laravel qui renvoit un 404 
+        $persona = persona::findOrfail($id);
+
+        //première méthode mais longue pour renvoyer une erreur
+        //si pas d'id trouvé return erreur 404
+        // if ($persona === null) {
+        //     abort(404);
+        // };
+
+
+
+        return view('personas.persona', [
+            'persona' => $persona
+        ]);
     }
 }

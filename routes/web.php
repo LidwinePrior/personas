@@ -35,13 +35,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Route pour les utilisateurs normaux
     Route::get('/index', [PersonaController::class, 'index'])->name('index');
 
-    // Routes pour les administrateurs et les super administrateurs
-    Route::middleware(['admin'])->group(function () {
-        Route::resource('personas', PersonaController::class)->except(['show']);
-    });
+    Route::get('{id}', [PersonaController::class, 'show']);
+    // // Routes pour les administrateurs et les super administrateurs
+    // Route::middleware(['admin'])->group(function () {
+    //     Route::resource('personas', PersonaController::class)->except(['show']);
+    // });
 
-    // Routes supplémentaires pour les super administrateurs
-    Route::middleware(['superadmin'])->group(function () {
-        Route::resource('users', UserController::class)->except(['create', 'store']);
-    });
+    // // Routes supplémentaires pour les super administrateurs
+    // Route::middleware(['superadmin'])->group(function () {
+    //     Route::resource('users', UserController::class)->except(['create', 'store']);
+    // });
 });

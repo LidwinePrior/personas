@@ -15,4 +15,10 @@ class Persona extends Model
         'description', // Description du persona
         'photo',
     ];
+
+    // Méthode pour récupérer tous les personas
+    public static function getAllPersonas()
+    {
+        return self::all();
+    }
 }
